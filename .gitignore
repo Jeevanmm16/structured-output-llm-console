@@ -1,0 +1,39 @@
+## .NET / C# gitignore
+
+# Build outputs
+bin/
+obj/
+
+# NuGet packages (restore them; don't commit them)
+*.nupkg
+*.snupkg
+.nuget/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docobj
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test results
+TestResults/
+coverage*/
+*.trx
+*.coveragexml
+
+# Logs
+*.log
+
+# dotnet CLI tools local config
+.config/dotnet-tools.json

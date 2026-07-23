@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="StructuredOutputDemo.Tests/StructuredOutputDemo.Tests.csproj" />
+  <Project Path="StructuredOutputDemo/StructuredOutputDemo.csproj" />
+</Solution>
