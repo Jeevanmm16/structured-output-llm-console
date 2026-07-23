@@ -25,14 +25,22 @@ public class ConsoleDisplay
 
     /// <summary>
     /// Prompts the user to enter a support ticket and returns the trimmed input.
-    /// Returns <see cref="string.Empty"/> if the user presses Enter without typing.
+    /// Returns <c>null</c> when stdin reaches EOF (non-interactive terminal / pipe).
+    /// Returns <see cref="string.Empty"/> when the user presses Enter without typing.
     /// </summary>
-    public string PromptUserInput()
+    public string? PromptUserInput()
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.Write("Enter support ticket (or 'exit' to quit): ");
         Console.ResetColor();
-        return Console.ReadLine()?.Trim() ?? string.Empty;
+
+        string? line = Console.ReadLine();
+
+        // null means EOF — the terminal is non-interactive (e.g. piped input or VS run button)
+        if (line is null)
+            return null;
+
+        return line.Trim();
     }
 
     /// <summary>Echoes the user's input back for clarity.</summary>

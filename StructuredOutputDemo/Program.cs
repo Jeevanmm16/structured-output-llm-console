@@ -15,7 +15,23 @@ display.PrintHeader();
 
 while (true)
 {
-    string userInput = display.PromptUserInput();
+    string? userInput = display.PromptUserInput();
+
+    // null = EOF: stdin is not interactive (e.g. VS run button, piped input)
+    // Show a clear message and exit rather than looping endlessly.
+    if (userInput is null)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine();
+        Console.WriteLine("  ERROR: No interactive terminal detected.");
+        Console.WriteLine("  Please run this application from a terminal:");
+        Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("    dotnet run --project StructuredOutputDemo");
+        Console.WriteLine();
+        Console.ResetColor();
+        break;
+    }
 
     if (string.Equals(userInput, "exit", StringComparison.OrdinalIgnoreCase))
     {
@@ -43,7 +59,7 @@ while (true)
     catch (HttpRequestException ex)
     {
         display.PrintFailure(
-            $"Cannot connect to Ollama. Is it running? (ollama serve)\nDetail: {ex.Message}");
+            $"Cannot connect to Ollama. Is it running? Run: ollama serve\nDetail: {ex.Message}");
     }
     catch (Exception ex)
     {
